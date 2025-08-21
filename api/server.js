@@ -2,6 +2,7 @@
 import express from "express";
 import { config as configDotenv } from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import authRouter from "./routes/authRoutes.js";
 import incomeRoutes from "./routes/incomeRoutes.js";
@@ -14,6 +15,7 @@ configDotenv();
 const app = express();
 connectDB();
 // Middleware
+app.use(cookieParser());
 const corsOptions = {
   origin: process.env.CLIENT_URL || "http://localhost:5173",
   methods: ["GET", "POST", "PUT", "DELETE"],

@@ -26,5 +26,5 @@ export const DASHBOARD = {
 export const AUTH = {
   LOGIN: `${BASE_URL}/auth/login`,
   SIGNUP: `${BASE_URL}/auth/signup`,
-  GET_USER: `${BASE_URL}/getUser`,
+  GET_USER: `${BASE_URL}/auth/getUser`,
 };

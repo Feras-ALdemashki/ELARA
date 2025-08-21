@@ -51,7 +51,19 @@ export const login = async (req, res) => {
       expiresIn: "1d",
     });
 
-    res.json({ message: "Login successful", user, token });
+    // set token as HTTP-only cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Lax",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
+    // send user info
+    res.json({
+      message: "Login successful",
+      user: { id: user._id, email: user.email, name: user.name },
+    });
   } catch (err) {
     res.status(500).json({ message: "Login error", error: err.message });
   }
@@ -63,7 +75,7 @@ export const getUserProfile = async (req, res) => {
     // req.user.id comes from auth middleware
     const user = await User.findById(req.user.id).select("-password");
     if (!user) return res.status(404).json({ message: "User not found" });
-
+    res.set("Cache-Control", "no-store");
     res.json(user);
   } catch (err) {
     res

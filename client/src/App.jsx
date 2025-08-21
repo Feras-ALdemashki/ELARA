@@ -18,8 +18,22 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<RootRedirect />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/login"
+            element={
+              <AuthRoute>
+                <Login />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <AuthRoute>
+                <Signup />
+              </AuthRoute>
+            }
+          />
 
           {/* Protected routes */}
           <Route
@@ -56,7 +70,7 @@ export default App;
 
 // Redirects "/" based on login state
 const RootRedirect = () => {
-  const { user, loading } = useContext(AuthContext); // <-- use AuthContext
+  const { user, loading } = useContext(AuthContext);
 
   if (loading) return <div>Loading...</div>;
 
@@ -65,11 +79,20 @@ const RootRedirect = () => {
 
 // Protects routes that require login
 const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useContext(AuthContext); // <-- use AuthContext
-
+  const { user, loading } = useContext(AuthContext);
+  console.log(user);
   if (loading) return <div>Loading...</div>;
 
   if (!user) return <Navigate to="/login" />;
 
   return children;
+};
+const AuthRoute = ({ children }) => {
+  const { user, loading } = useContext(AuthContext);
+
+  if (loading) return <div>Loading...</div>;
+
+  if (user) return <Navigate to="/dashboard" replace />; // logged-in users can't go here
+
+  return children; // guests can access
 };
