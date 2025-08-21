@@ -33,8 +33,13 @@ const Login = () => {
       toast.success("Logged in successfully!");
       navigate("/dashboard");
     } catch (error) {
-      console.error(error);
-      toast.error("Login failed");
+      const serverMessage = error.response?.data?.message;
+
+      if (serverMessage) {
+        toast.error(serverMessage);
+      } else {
+        toast.error("Login failed. Please try again.");
+      }
     }
   };
 
