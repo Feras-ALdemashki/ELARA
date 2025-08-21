@@ -15,17 +15,19 @@ const app = express();
 connectDB();
 // Middleware
 const corsOptions = {
-  origin: [process.env.CLIENT_URL || "http://localhost:3000"],
+  origin: process.env.CLIENT_URL || "http://localhost:5173",
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowHeaders: ["content-type", "authorization"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
+
 app.use(express.json());
 // connect to routes
 app.use("/api/auth", authRouter);
 app.use("/api/income", incomeRoutes);
-app.use("api/expenses", expensesRoutes);
+app.use("/api/expenses", expensesRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 // Start server
 const PORT = process.env.PORT || 5000;

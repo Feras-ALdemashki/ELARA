@@ -5,8 +5,8 @@ import { toast } from "react-hot-toast";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 const Signup = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -14,7 +14,7 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!name || !email || !password) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -42,24 +42,13 @@ const Signup = () => {
 
         {/* Signup Form */}
         <form onSubmit={handleSignup} className="space-y-4">
-          {/* First Name */}
+          {/*  Name */}
           <div className="flex items-center border-b border-primary py-2">
             <input
               type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="First Name"
-              className="w-full bg-transparent outline-none text-primary placeholder-gray-400"
-            />
-          </div>
-
-          {/* Last Name */}
-          <div className="flex items-center border-b border-primary py-2">
-            <input
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Last Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder=" Name"
               className="w-full bg-transparent outline-none text-primary placeholder-gray-400"
             />
           </div>
