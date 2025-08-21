@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { PiEyeLight, PiEyeClosedThin } from "react-icons/pi";
 import { toast } from "react-hot-toast";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../../context/AuthContext";
+
 const Login = () => {
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -22,9 +27,20 @@ const Login = () => {
       toast.error("Invalid email address");
       return;
     }
+    try {
+      // calls AuthContext login
+      await login(email, password);
+      toast.success("Logged in successfully!");
+      navigate("/dashboard");
+    } catch (error) {
+      const serverMessage = error.response?.data?.message;
 
-    toast.success("Logged in successfully!");
-    //api call
+      if (serverMessage) {
+        toast.error(serverMessage);
+      } else {
+        toast.error("Login failed. Please try again.");
+      }
+    }
   };
 
   return (

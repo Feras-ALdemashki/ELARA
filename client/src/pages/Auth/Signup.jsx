@@ -3,10 +3,13 @@ import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { PiEyeLight, PiEyeClosedThin } from "react-icons/pi";
 import { toast } from "react-hot-toast";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AUTH } from "../../utils/api";
+
 const Signup = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -14,7 +17,7 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!name || !email || !password) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -25,8 +28,25 @@ const Signup = () => {
       return;
     }
 
-    toast.success("Signed up successfully!");
-    //api call
+    try {
+      const { data } = await axios.post(
+        AUTH.SIGNUP,
+        { name, email, password },
+        { withCredentials: true }
+      );
+
+      toast.success("Signup successful! please log in");
+      navigate("/login");
+      return data;
+    } catch (error) {
+      const serverMessage = error.response?.data?.message;
+
+      if (serverMessage) {
+        toast.error(serverMessage);
+      } else {
+        toast.error("Signup failed. Please try again.");
+      }
+    }
   };
 
   return (
@@ -42,24 +62,13 @@ const Signup = () => {
 
         {/* Signup Form */}
         <form onSubmit={handleSignup} className="space-y-4">
-          {/* First Name */}
+          {/*  Name */}
           <div className="flex items-center border-b border-primary py-2">
             <input
               type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="First Name"
-              className="w-full bg-transparent outline-none text-primary placeholder-gray-400"
-            />
-          </div>
-
-          {/* Last Name */}
-          <div className="flex items-center border-b border-primary py-2">
-            <input
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Last Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder=" Name"
               className="w-full bg-transparent outline-none text-primary placeholder-gray-400"
             />
           </div>
