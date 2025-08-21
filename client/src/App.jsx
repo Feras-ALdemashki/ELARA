@@ -1,15 +1,18 @@
 import "./App.css";
-import Login from "./pages/Auth/Login";
-import Signup from "./pages/Auth/Signup";
-import Home from "./pages/Dashboard/Home";
-import Income from "./pages/Dashboard/Income";
-import Expenses from "./pages/Dashboard/Expenses";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { toastOptions } from "./utils/toastOptions";
 import { AuthProvider } from "./context/AuthProvider";
-import { AuthContext } from "./context/AuthContext"; // <-- important
+import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
+
+import Login from "./pages/Auth/Login";
+import Signup from "./pages/Auth/Signup";
+
+import Income from "./pages/Income";
+import Expenses from "./pages/Expenses";
+import Layout from "./components/Layout";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -17,7 +20,10 @@ function App() {
       <Toaster toastOptions={toastOptions} />
       <BrowserRouter>
         <Routes>
+          {/* Root redirect */}
           <Route path="/" element={<RootRedirect />} />
+
+          {/* Auth routes */}
           <Route
             path="/login"
             element={
@@ -35,31 +41,18 @@ function App() {
             }
           />
 
-          {/* Protected routes */}
+          {/* Protected routes with layout */}
           <Route
-            path="/dashboard"
             element={
               <ProtectedRoute>
-                <Home />
+                <Layout />
               </ProtectedRoute>
             }
-          />
-          <Route
-            path="/income"
-            element={
-              <ProtectedRoute>
-                <Income />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/expenses"
-            element={
-              <ProtectedRoute>
-                <Expenses />
-              </ProtectedRoute>
-            }
-          />
+          >
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/income" element={<Income />} />
+            <Route path="/expenses" element={<Expenses />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
@@ -68,31 +61,35 @@ function App() {
 
 export default App;
 
-// Redirects "/" based on login state
+// Redirect "/" based on login state
 const RootRedirect = () => {
   const { user, loading } = useContext(AuthContext);
 
   if (loading) return <div>Loading...</div>;
 
-  return user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />;
+  return user ? (
+    <Navigate to="/dashboard" replace />
+  ) : (
+    <Navigate to="/login" replace />
+  );
 };
 
-// Protects routes that require login
+// Protect routes
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  console.log(user);
-  if (loading) return <div>Loading...</div>;
 
-  if (!user) return <Navigate to="/login" />;
+  if (loading) return <div>Loading...</div>;
+  if (!user) return <Navigate to="/login" replace />;
 
   return children;
 };
+
+// Prevent logged-in users from visiting auth pages
 const AuthRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
 
   if (loading) return <div>Loading...</div>;
+  if (user) return <Navigate to="/dashboard" replace />;
 
-  if (user) return <Navigate to="/dashboard" replace />; // logged-in users can't go here
-
-  return children; // guests can access
+  return children;
 };
