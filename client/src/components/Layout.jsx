@@ -1,20 +1,14 @@
-import React from "react";
-import { Outlet } from "react-router-dom"; // <-- import Outlet
+import { Outlet } from "react-router-dom";
+
 import Header from "./Header";
-import SideMenu from "./SideMenu";
 
 const Layout = () => {
   return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
-      <SideMenu />
+    <div className="flex flex-col h-screen">
+      <Header />
 
-      {/* Main content */}
-      <div className="flex flex-col flex-1">
-        <Header />
-
-        {/* This is where child routes will render */}
-        <main className="p-4 flex-1 overflow-y-auto bg-gray-50">
+      <div className="flex flex-1 overflow-hidden">
+        <main className="flex-1 p-4 overflow-y-auto bg-background">
           <Outlet />
         </main>
       </div>
