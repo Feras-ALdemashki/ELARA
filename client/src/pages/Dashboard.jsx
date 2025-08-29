@@ -6,6 +6,10 @@ import Card from "../components/dashboard/Card";
 import { FaWallet } from "react-icons/fa";
 import { FaCreditCard } from "react-icons/fa";
 import { GiPiggyBank } from "react-icons/gi";
+// import Last5Expenses from "../components/dashboard/Last5Expenses";
+import Last5Income from "../components/dashboard/Last5Income";
+import Last5Expenses from "../components/dashboard/Last5Expenses";
+import ExpensesPieChart from "../components/dashboard/ExpensesPieChart";
 
 const Dashboard = () => {
   const [data, setData] = useState();
@@ -24,27 +28,38 @@ const Dashboard = () => {
     fetchData();
   }, []);
   return (
-    <div className="flex flex-wrap gap-6 justify-between mt-1.5">
-      {data && (
-        <>
-          <Card
-            title="Income"
-            value={data.income.total}
-            icon={<FaWallet className="text-accent" />}
-          />
-          <Card
-            title="Expenses"
-            value={data.expenses.total}
-            icon={<FaCreditCard className="text-accent" />}
-          />
-          <Card
-            title="Balance"
-            value={data.income.total - data.expenses.total}
-            icon={<GiPiggyBank className="text-accent" />}
-          />
-        </>
-      )}
-    </div>
+    <>
+      {/* Cards Row */}
+      <div className="flex flex-wrap gap-6 justify-center md:justify-between mt-1.5">
+        {data && (
+          <>
+            <Card
+              title="Income"
+              value={data.income.total}
+              icon={<FaWallet className="text-accent" />}
+            />
+            <Card
+              title="Expenses"
+              value={data.expenses.total}
+              icon={<FaCreditCard className="text-accent" />}
+            />
+            <Card
+              title="Balance"
+              value={data.income.total - data.expenses.total}
+              icon={<GiPiggyBank className="text-accent" />}
+            />
+          </>
+        )}
+      </div>
+
+      {/* Grid Section Under Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
+        <div>{data && <Last5Expenses data={data} />}</div>
+        <div>{data && <ExpensesPieChart data={data} />}</div>
+        <div>income chart </div>
+        <div>{data && <Last5Income data={data} />}</div>
+      </div>
+    </>
   );
 };
 
