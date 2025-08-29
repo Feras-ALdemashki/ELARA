@@ -27,4 +27,5 @@ export const AUTH = {
   LOGIN: `${BASE_URL}/auth/login`,
   SIGNUP: `${BASE_URL}/auth/signup`,
   GET_USER: `${BASE_URL}/auth/getUser`,
+  LOGOUT: `${BASE_URL}/auth/logout`,
 };

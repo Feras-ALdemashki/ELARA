@@ -15,7 +15,7 @@ const IncomesBarChart = ({ data }) => {
 
   // Generate colors based on 2 base colors
   const colors = chroma
-    .scale(["#4ECDC4", "#1A535C"])
+    .scale(["#4ECDC4", "#af3a40"])
     .mode("lab")
     .colors(incomesData.length);
 
