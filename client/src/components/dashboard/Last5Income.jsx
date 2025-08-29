@@ -2,7 +2,7 @@ import React from "react";
 
 const Last5Income = ({ data }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 w-full">
+    <div className="bg-white shadow-md rounded-lg p-12 w-full">
       <h2 className="text-lg font-bold text-accent mb-4 text-center">
         Last 5 Incomes
       </h2>

@@ -10,6 +10,7 @@ import { GiPiggyBank } from "react-icons/gi";
 import Last5Income from "../components/dashboard/Last5Income";
 import Last5Expenses from "../components/dashboard/Last5Expenses";
 import ExpensesPieChart from "../components/dashboard/ExpensesPieChart";
+import IncomesBarChart from "../components/dashboard/IncomesBarChart";
 
 const Dashboard = () => {
   const [data, setData] = useState();
@@ -56,7 +57,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
         <div>{data && <Last5Expenses data={data} />}</div>
         <div>{data && <ExpensesPieChart data={data} />}</div>
-        <div>income chart </div>
+        <div>{data && <IncomesBarChart data={data} />}</div>
         <div>{data && <Last5Income data={data} />}</div>
       </div>
     </>

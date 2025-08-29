@@ -14,7 +14,7 @@ const ExpensesPieChart = ({ data }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 w-full ">
       <h2 className="text-lg font-bold text-gray-800 mb-4 text-center">
-        Expenses PieChart
+        Expenses chart
       </h2>
       <div className="flex justify-center">
         <PieChart width={300} height={300}>
