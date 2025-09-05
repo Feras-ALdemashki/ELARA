@@ -35,7 +35,7 @@ export const dashboardData = async (req, res) => {
       .sort({ date: -1 })
       .limit(30);
     const last5Expenses = await Expense.find({ user: userId })
-      .sort({ date: -1 })
+      .sort({ date: -1, _id: -1 })
       .limit(5);
     const totalExpensesAgg = await Expense.aggregate([
       { $match: { user: userId } },

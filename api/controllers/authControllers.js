@@ -83,3 +83,14 @@ export const getUserProfile = async (req, res) => {
       .json({ message: "Error fetching profile", error: err.message });
   }
 };
+
+export const logout = async (req, res) => {
+  res.cookie("token", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    expires: new Date(0),
+  });
+
+  res.status(200).json({ message: "Logged out successfully" });
+};

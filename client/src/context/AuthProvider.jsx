@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
 import axios from "axios";
 import { AUTH } from "../utils/api";
-
+import toast from "react-hot-toast";
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,8 +34,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await axios.post(AUTH.LOGOUT, {}, { withCredentials: true });
-    setUser(null);
+    try {
+      await axios.post(AUTH.LOGOUT, { withCredentials: true });
+      setUser(null);
+      toast.success("Logged out successfully");
+    } catch (error) {
+      toast.error("Logout failed");
+      console.error(error);
+    }
   };
 
   return (

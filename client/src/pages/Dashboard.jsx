@@ -11,9 +11,11 @@ import Last5Income from "../components/dashboard/Last5Income";
 import Last5Expenses from "../components/dashboard/Last5Expenses";
 import ExpensesPieChart from "../components/dashboard/ExpensesPieChart";
 import IncomesBarChart from "../components/dashboard/IncomesBarChart";
+import Modal from "../components/Modal";
 
 const Dashboard = () => {
   const [data, setData] = useState();
+  const [model, setModel] = useState(false);
   console.log(data);
   const fetchData = async () => {
     try {
@@ -32,6 +34,13 @@ const Dashboard = () => {
     <>
       {/* Cards Row */}
       <div className="flex flex-wrap gap-6 justify-center md:justify-between mt-1.5">
+        {model && (
+          <Modal
+            onClose={() => {
+              setModel(false);
+            }}
+          />
+        )}
         {data && (
           <>
             <Card
@@ -42,12 +51,12 @@ const Dashboard = () => {
             <Card
               title="Expenses"
               value={data.expenses.total}
-              icon={<FaCreditCard className="text-accent" />}
+              icon={<FaCreditCard className="text-accent2" />}
             />
             <Card
               title="Balance"
               value={data.income.total - data.expenses.total}
-              icon={<GiPiggyBank className="text-accent" />}
+              icon={<GiPiggyBank className="text-[#4a90e2]" />}
             />
           </>
         )}
@@ -55,10 +64,29 @@ const Dashboard = () => {
 
       {/* Grid Section Under Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
-        <div>{data && <Last5Expenses data={data} />}</div>
+        <div>
+          {data && (
+            <Last5Expenses
+              data={data}
+              onClick={() => {
+                setModel(true);
+              }}
+            />
+          )}
+        </div>
+
         <div>{data && <ExpensesPieChart data={data} />}</div>
         <div>{data && <IncomesBarChart data={data} />}</div>
-        <div>{data && <Last5Income data={data} />}</div>
+        <div>
+          {data && (
+            <Last5Income
+              data={data}
+              onClick={() => {
+                setModel(true);
+              }}
+            />
+          )}
+        </div>
       </div>
     </>
   );

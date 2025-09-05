@@ -7,9 +7,9 @@ const expenseSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    icon: {
+    emoji: {
       type: String,
-      default: "💸", // default expense icon
+      default: "💸",
     },
     category: {
       type: String,
@@ -24,9 +24,10 @@ const expenseSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    note: {
-      type: String, // optional field for extra details
+    description: {
+      type: String,
       trim: true,
+      required: true,
     },
   },
   { timestamps: true }

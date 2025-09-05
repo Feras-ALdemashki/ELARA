@@ -1,20 +1,28 @@
 import React from "react";
+import Button from "../Button";
 
-const Last5Expenses = ({ data }) => {
+import { GoArrowRight, GoPlus } from "react-icons/go";
+const Last5Expenses = ({ data, onClick }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg p-12 w-full">
-      <h2 className="text-lg font-bold text-accent2 mb-4 text-center">
-        Last 5 Expenses
-      </h2>
+    <div className="bg-white shadow-md rounded-lg p-6 w-full">
+      {/* Header Row */}
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-bold text-accent2">Expenses</h2>
+        <div className="flex gap-2">
+          <Button name="See All" icon={GoArrowRight} onClick={() => {}} />
+          <Button name="Add Expense" icon={GoPlus} onClick={onClick} />
+        </div>
+      </div>
 
+      {/* Expenses List */}
       <div className="space-y-3">
         {data.expenses.last5.map((expense) => (
           <div
             key={expense._id}
-            className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-2 last:border-none"
+            className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 p-2 last:border-none"
           >
             {/* Icon */}
-            <div className="text-2xl">{expense.icon}</div>
+            <div className="text-2xl">{expense.emoji}</div>
 
             {/* Category & Date */}
             <div className="flex flex-col ml-3 flex-1">

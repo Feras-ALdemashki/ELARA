@@ -4,9 +4,9 @@ import xlsx from "xlsx";
 // Add expense
 export const addExpense = async (req, res) => {
   try {
-    const { category, amount, date, icon, note } = req.body;
+    const { category, amount, date, emoji, description } = req.body;
 
-    if (!category || !amount || !date) {
+    if (!category || !amount || !date || !description) {
       return res
         .status(400)
         .json({ message: "Please provide all required fields" });
@@ -17,8 +17,8 @@ export const addExpense = async (req, res) => {
       category,
       amount,
       date,
-      icon,
-      note,
+      emoji,
+      description,
     });
 
     await expense.save();

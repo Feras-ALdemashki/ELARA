@@ -59,7 +59,7 @@ const Header = () => {
           )}
           <button
             onClick={logout}
-            className="px-3 py-1 bg-primary text-white rounded hover:bg-primary-dark transition-colors"
+            className="px-3 py-1 bg-primary text-white rounded  hover:text-accent2 cursor-pointer"
           >
             Logout
           </button>
