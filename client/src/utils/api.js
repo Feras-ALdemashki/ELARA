@@ -11,10 +11,10 @@ export const INCOME = {
 
 // Expense endpoints
 export const EXPENSE = {
-  ADD: `${BASE_URL}/expense/addExpense`,
-  GET_ALL: `${BASE_URL}/expense/getExpenses`,
-  DELETE: (id) => `${BASE_URL}/expense/${id}`,
-  GET_EXCEL: `${BASE_URL}/expense/getExcelFile`,
+  ADD: `${BASE_URL}/expenses/addExpenses`,
+  GET_ALL: `${BASE_URL}/expenses/getExpenses`,
+  DELETE: (id) => `${BASE_URL}/expenses/${id}`,
+  GET_EXCEL: `${BASE_URL}/expenses/getExcelFile`,
 };
 
 // Dashboard endpoint

@@ -7,11 +7,11 @@ const incomeSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    icon: {
+    emoji: {
       type: String,
       default: "💰",
     },
-    source: {
+    category: {
       type: String,
       required: true,
       trim: true,
@@ -22,6 +22,11 @@ const incomeSchema = new mongoose.Schema(
     },
     amount: {
       type: Number,
+      required: true,
+    },
+    description: {
+      type: String,
+      trim: true,
       required: true,
     },
   },

@@ -22,7 +22,7 @@ const Last5Expenses = ({ data, onClick }) => {
             className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 p-2 last:border-none"
           >
             {/* Icon */}
-            <div className="text-2xl">{expense.icon}</div>
+            <div className="text-2xl">{expense.emoji}</div>
 
             {/* Category & Date */}
             <div className="flex flex-col ml-3 flex-1">

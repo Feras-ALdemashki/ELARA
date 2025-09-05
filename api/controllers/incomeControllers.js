@@ -3,19 +3,20 @@ import xlsx from "xlsx";
 // add income
 export const addIncome = async (req, res) => {
   try {
-    const { source, amount, date, icon } = req.body;
+    const { category, amount, date, emoji, description } = req.body;
 
-    if (!source || !amount || !date) {
+    if (!category || !amount || !date || !description) {
       return res.status(400).json({ message: "Please provide all fields" });
     }
 
     const income = new Income({
       // from middleware protected
       user: req.user._id,
-      source,
+      category,
       amount,
       date,
-      icon,
+      emoji,
+      description,
     });
 
     await income.save();

@@ -19,12 +19,12 @@ const Last5Income = ({ data, onClick }) => {
             className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-2 last:border-none"
           >
             {/* Icon */}
-            <div className="text-2xl">{income.icon || "💰"}</div>
+            <div className="text-2xl">{income.emoji || "💰"}</div>
 
             {/* Source & Date */}
             <div className="flex flex-col ml-3 flex-1">
               <p className="text-sm font-medium text-primary">
-                {income.source}
+                {income.category}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
                 {new Date(income.date).toLocaleDateString()}
