@@ -2,19 +2,23 @@ import React from "react";
 
 const Card = ({ title, value, icon }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 flex flex-col justify-between w-64">
+    <div className="group bg-white text-primary hover:bg-primary hover:text-secondary transition-colors duration-300 shadow-md rounded-lg p-6 flex flex-col justify-between w-64 border-primary border-1">
       {/* Top section: title + icon */}
       <div className="flex items-center justify-between">
         {title && (
-          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+          <h3 className="text-sm font-medium text-primary group-hover:text-white">
             {title}
           </h3>
         )}
-        {icon && <div className="text-primary text-2xl">{icon}</div>}
+        {icon && (
+          <div className="text-primary text-2xl group-hover:text-white">
+            {icon}
+          </div>
+        )}
       </div>
 
       {/* Main Value */}
-      <p className="text-3xl font-bold text-gray-900 dark:text-white mt-4">
+      <p className="text-3xl font-bold text-primary group-hover:text-white">
         €{value}
       </p>
     </div>

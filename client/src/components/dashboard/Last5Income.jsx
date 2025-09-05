@@ -1,11 +1,16 @@
 import React from "react";
-
-const Last5Income = ({ data }) => {
+import { GoArrowRight, GoPlus } from "react-icons/go";
+import Button from "../Button";
+const Last5Income = ({ data, onClick }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg p-12 w-full">
-      <h2 className="text-lg font-bold text-accent mb-4 text-center">
-        Last 5 Incomes
-      </h2>
+    <div className="bg-white shadow-md rounded-lg p-10 w-full">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-bold text-accent">Incomes</h2>
+        <div className="flex gap-2">
+          <Button name="See All" icon={GoArrowRight} onClick={() => {}} />
+          <Button name="Add Expense" icon={GoPlus} onClick={onClick} />
+        </div>
+      </div>
 
       <div className="space-y-3">
         {data.income.last5.map((income) => (
