@@ -12,10 +12,12 @@ const SelectCategory = ({ type, category, onTypeChange, onCategoryChange }) => {
     { value: "investments", label: "Investments" },
     { value: "rental", label: "Rental" },
     { value: "gift", label: "Gift" },
+    { value: "other", label: "other" },
   ];
 
   const expenseCategories = [
-    { value: "food", label: "Food & Groceries" },
+    { value: "food", label: "Food " },
+    { value: "Groceries", label: " Groceries" },
     { value: "rent", label: "Rent" },
     { value: "transport", label: "Transport" },
     { value: "entertainment", label: "Entertainment" },
