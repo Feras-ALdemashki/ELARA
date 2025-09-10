@@ -47,7 +47,7 @@ const Modal = ({ onClose }) => {
         formData.type.value === "expense" ? EXPENSE.ADD : INCOME.ADD;
 
       await axios.post(endpoint, payload, { withCredentials: true });
-      toast.success("Entry added successfully!");
+      toast.success("added successfully!");
       onClose();
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -115,7 +115,7 @@ const Modal = ({ onClose }) => {
             type="text"
             value={formData.description}
             onChange={(e) => handleChange("description", e.target.value)}
-            placeholder="Optional description"
+            placeholder=" description"
           />
         </div>
 
