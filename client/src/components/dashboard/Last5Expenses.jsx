@@ -1,17 +1,24 @@
 import React from "react";
 import Button from "../Button";
 import { GoArrowRight, GoPlus } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
 const Last5Expenses = ({ data, onClick }) => {
   const last5 = data?.expenses?.last5 ?? [];
-
+  const navigate = useNavigate();
   return (
     <div className=" p-6  flex flex-col">
       {/* Header Row */}
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-bold text-accent2">Expenses</h2>
         <div className="flex gap-2">
-          <Button name="See All" icon={GoArrowRight} onClick={() => {}} />
+          <Button
+            name="See All"
+            icon={GoArrowRight}
+            onClick={() => {
+              navigate("/expenses");
+            }}
+          />
           <Button name="Add Expense" icon={GoPlus} onClick={onClick} />
         </div>
       </div>

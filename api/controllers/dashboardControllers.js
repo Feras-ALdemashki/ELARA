@@ -23,7 +23,7 @@ export const dashboardData = async (req, res) => {
     const allIncome = await Income.find({ user: userId });
     const incomesByCategory = await Income.aggregate([
       { $match: { user: userId } },
-      { $group: { _id: "$source", total: { $sum: "$amount" } } },
+      { $group: { _id: "$category", total: { $sum: "$amount" } } },
       { $project: { _id: 0, category: "$_id", total: 1 } },
     ]);
 

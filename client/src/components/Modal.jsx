@@ -38,7 +38,7 @@ const Modal = ({ onClose }) => {
       const payload = {
         emoji: formData.emoji,
         amount: amountNumber,
-        category: formData.category.label,
+        category: formData.category.value,
         date: formData.date,
         description: formData.description,
       };

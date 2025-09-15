@@ -52,17 +52,17 @@ const Dashboard = () => {
             <>
               <Card
                 title="Income"
-                value={data.income.total}
+                value={data.income.total.toFixed(1)}
                 icon={<FaWallet className="text-accent" />}
               />
               <Card
                 title="Expenses"
-                value={data.expenses.total}
+                value={data.expenses.total.toFixed(1)}
                 icon={<FaCreditCard className="text-accent2" />}
               />
               <Card
                 title="Balance"
-                value={data.income.total - data.expenses.total}
+                value={(data.income.total - data.expenses.total).toFixed(1)}
                 icon={<GiPiggyBank className="text-[#4a90e2]" />}
               />
             </>
