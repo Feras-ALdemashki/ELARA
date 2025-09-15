@@ -1,5 +1,6 @@
 // Base URL for backend API
-export const BASE_URL = "http://localhost:8000/api"; //  to be changed to deployed URL later
+export const BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
 // Income endpoints
 export const INCOME = {
