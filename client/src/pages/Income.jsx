@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { INCOME } from "../utils/api";
+import { MdDeleteForever } from "react-icons/md";
 
 const Incomes = () => {
   const [data, setData] = useState([]);
@@ -59,9 +60,9 @@ const Incomes = () => {
                 {/* Delete button */}
                 <button
                   onClick={() => handleDelete(income._id)}
-                  className="absolute top-2 right-2 text-red-500 hover:text-red-700 text-sm font-bold"
+                  className="absolute top-2 right-2  hover:text-accent2 text-sm font-bold"
                 >
-                  X
+                  <MdDeleteForever />
                 </button>
 
                 <div className="flex items-center gap-4">
