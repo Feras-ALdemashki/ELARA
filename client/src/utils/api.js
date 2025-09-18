@@ -15,7 +15,7 @@ export const EXPENSE = {
   ADD: `${BASE_URL}/expenses/addExpenses`,
   GET_ALL: `${BASE_URL}/expenses/getExpenses`,
   DELETE: (id) => `${BASE_URL}/expenses/${id}`,
-  GET_EXCEL: `${BASE_URL}/expenses/getExcelFile`,
+  GET_EXCEL: `${BASE_URL}/expenses/getExcelFileExpenses`,
 };
 
 // Dashboard endpoint
