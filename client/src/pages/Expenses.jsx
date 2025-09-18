@@ -3,6 +3,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { EXPENSE } from "../utils/api";
 import { MdDeleteForever } from "react-icons/md";
+import Button from "../components/Button";
+import { IoDownloadOutline } from "react-icons/io5";
+
 const Expenses = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -35,12 +38,37 @@ const Expenses = () => {
     fetchData();
   }, []);
 
+  const downloadExcel = async () => {
+    try {
+      const res = await axios.get(EXPENSE.GET_EXCEL, {
+        withCredentials: true,
+        responseType: "blob", // 👈 important
+      });
+
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "expenses.xlsx");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       {loading ? (
         <p className="text-gray-500 text-center">Loading expenses...</p>
       ) : (
         <div className="space-y-4">
+          <div>
+            <Button
+              name={"download Excel sheet"}
+              icon={IoDownloadOutline}
+              onClick={downloadExcel}
+            />
+          </div>
           {data.map((expense) => {
             const formattedDate = new Date(expense.date).toLocaleDateString(
               "en-US",

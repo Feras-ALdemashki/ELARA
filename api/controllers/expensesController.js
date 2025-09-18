@@ -69,7 +69,6 @@ export const getExcelFileExpenses = async (req, res) => {
       Category: e.category,
       Amount: e.amount,
       Date: e.date.toISOString().split("T")[0],
-      Note: e.note || "",
     }));
 
     const wb = xlsx.utils.book_new();

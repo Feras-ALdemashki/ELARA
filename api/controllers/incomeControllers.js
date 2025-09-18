@@ -62,10 +62,10 @@ export const getExcelFile = async (req, res) => {
       date: -1,
     });
 
-    const data = incomes.map((i) => ({
-      Source: i.source,
-      Amount: i.amount,
-      Date: i.date.toISOString().split("T")[0],
+    const data = incomes.map((e) => ({
+      Category: e.category,
+      Amount: e.amount,
+      Date: e.date.toISOString().split("T")[0],
     }));
 
     const wb = xlsx.utils.book_new();
