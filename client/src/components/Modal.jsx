@@ -66,7 +66,7 @@ const Modal = ({ onClose }) => {
       onClick={modalClose}
       className="fixed inset-0 bg-opacity-20 backdrop-blur-sm flex items-center justify-center z-50"
     >
-      <div className="relative bg-white p-6 rounded-lg shadow-lg w-[600px] flex flex-col gap-4">
+      <div className="relative bg-white p-6 rounded-lg shadow-lg w-[600px]  h-[90vh] flex flex-col gap-4">
         {/* Close button */}
         <button
           className="absolute top-2 right-2 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition"

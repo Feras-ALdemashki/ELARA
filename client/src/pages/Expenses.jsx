@@ -56,56 +56,66 @@ const Expenses = () => {
       console.log(error);
     }
   };
+
   return (
     <div>
       {loading ? (
         <p className="text-gray-500 text-center">Loading expenses...</p>
       ) : (
         <div className="space-y-4">
-          <div>
-            <Button
-              name={"download Excel sheet"}
-              icon={IoDownloadOutline}
-              onClick={downloadExcel}
-            />
-          </div>
-          {data.map((expense) => {
-            const formattedDate = new Date(expense.date).toLocaleDateString(
-              "en-US",
-              {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              }
-            );
-
-            return (
-              <div
-                key={expense.id}
-                className="relative flex items-center justify-between bg-white rounded-lg shadow p-4"
-              >
-                {/* Delete button */}
-                <button
-                  onClick={() => handleDelete(expense._id)}
-                  className="absolute top-2 right-2  hover:text-accent2 text-sm font-bold"
-                >
-                  <MdDeleteForever />
-                </button>
-
-                <div className="flex items-center gap-4">
-                  <span className="text-2xl">{expense.emoji}</span>
-                  <div>
-                    <p className="font-semibold">{expense.category}</p>
-                    <p className="text-sm text-gray-500">{formattedDate}</p>
-                    <p className="text-sm text-gray-600">
-                      {expense.description}
-                    </p>
-                  </div>
-                </div>
-                <p className="font-bold text-gray-800">${expense.amount}</p>
+          {data.length === 0 ? (
+            <p className="text-center text-gray-500">
+              Start by adding some expenses
+            </p>
+          ) : (
+            <>
+              <div>
+                <Button
+                  name={"Download Excel sheet"}
+                  icon={IoDownloadOutline}
+                  onClick={downloadExcel}
+                />
               </div>
-            );
-          })}
+
+              {data.map((expense) => {
+                const formattedDate = new Date(expense.date).toLocaleDateString(
+                  "en-US",
+                  {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  }
+                );
+
+                return (
+                  <div
+                    key={expense._id}
+                    className="relative flex items-center justify-between bg-white rounded-lg shadow p-4"
+                  >
+                    {/* Delete button */}
+                    <button
+                      onClick={() => handleDelete(expense._id)}
+                      className="absolute top-2 right-2 hover:text-accent2 text-sm font-bold"
+                    >
+                      <MdDeleteForever />
+                    </button>
+
+                    <div className="flex items-center gap-4">
+                      <span className="text-2xl">{expense.emoji}</span>
+                      <div>
+                        <p className="font-semibold">{expense.category}</p>
+                        <p className="text-sm text-gray-500">{formattedDate}</p>
+                        <p className="text-sm text-gray-600">
+                          {expense.description}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="font-bold text-gray-800">${expense.amount}</p>
+                  </div>
+                );
+              })}
+            </>
+          )}
         </div>
       )}
     </div>
