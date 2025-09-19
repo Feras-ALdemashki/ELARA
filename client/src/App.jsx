@@ -65,7 +65,12 @@ export default App;
 const RootRedirect = () => {
   const { user, loading } = useContext(AuthContext);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loader />
+      </div>
+    );
 
   return user ? (
     <Navigate to="/dashboard" replace />
