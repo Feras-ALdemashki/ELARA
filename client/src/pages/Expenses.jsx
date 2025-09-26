@@ -53,7 +53,7 @@ const Expenses = () => {
       link.click();
       link.remove();
     } catch (error) {
-      console.log(error);
+      toast.error("something went wrong please try again later");
     }
   };
 

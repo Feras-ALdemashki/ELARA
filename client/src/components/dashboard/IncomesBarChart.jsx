@@ -13,7 +13,7 @@ import chroma from "chroma-js";
 
 const IncomesBarChart = ({ data }) => {
   const rawIncomesData = data?.income?.byCategory || [];
-  console.log(data.income.byCategory);
+
   // Remove entries without category or total
   const incomesData = rawIncomesData.filter(
     (item) => item.category && item.total > 0
